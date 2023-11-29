@@ -13,29 +13,23 @@
 <xsl:output encoding="US-ASCII" method="text" omit-xml-declaration="yes" indent="no"/>
 
 
-
-<xsl:template match="h:html">
-\documentclass[12pt,a4paper]{article}
-\topmargin0pt
-\headheight0pt
-\headsep0pt
-\voffset-1cm
-
-\usepackage[T1]{fontenc}
-\usepackage{bm}
-
-\textheight0.6\textheight
-\paperheight0.6\paperheight
-
-
-
-\usepackage{amssymb,amsmath}
-\setcounter{MaxMatrixCols}{25}
-\usepackage{color,graphics,array,csscolor}
-\extrarowheight4pt
+<!-- changed to also work with single formula mathML XML documents -->
+<!--<xsl:template match="h:html">-->
+<xsl:template match="/">
+<!-- Chane this to output a stand a lone formula -->
+\documentclass[border=2pt]{standalone}
+\usepackage{amsmath}
+\usepackage{varwidth}
 \usepackage{pmml-new}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{sfmath}
 \begin{document}
-<xsl:apply-templates select="h:body/h:div"/>
+\begin{varwidth}{\linewidth}
+
+<!-- change to work with math at root -->
+<xsl:apply-templates select="h:body/h:div|m:math"/>
+
+\end{varwidth}
 \end{document}
 </xsl:template>
 

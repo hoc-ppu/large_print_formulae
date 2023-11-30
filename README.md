@@ -35,9 +35,31 @@ Using this method, first we transform the MathML to LaTeX using [XSLT](https://w
 
 #### XSLT
 
-If you do not already have an XSLT processor installed, you will need to install one. I used [Saxon](http://saxon.sourceforge.net/).
+If you do not already have an XSLT processor installed, you will need to install one. I used [Saxon](https://www.saxonica.com/download/download_page.xml).
 
-I used the [Homebrew](https://brew.sh/) package manager to install Saxon on Mac.
+There are a few different versions of Saxon to choose from. See the list below. You only need to use one method:
+
+##### Install Saxon method 1 Node.js (Mac, Linux, Windows)
+
+If you have [Node.js](https://nodejs.org/en/) installed, run the following (in powershell if you are using Windows or in a terminal if you are using Mac or Linux):
+
+```bash
+npm install -g saxon-js xslt3
+```
+
+Test that it is installed correctly by running the following command  (in powershell or terminal):
+
+```bash
+xslt3 -?
+```
+
+If saxon has been installed correctly you should see some help text printed out.
+
+##### Install Saxon method 2 Homebrew (Mac)
+
+On Mac you can install saxon via the [Homebrew](https://brew.sh/) package manager. Follow the homebrew install instructions and then run `brew install saxon` in a terminal. To check that it is installed correctly run `saxon -versionmsg`, you some help text printed out.
+
+##### Install Saxon method 3 .Net version (Windows)
 
 On windows I used installed the .Net version of Saxon from [Saxon dotnet](https://www.saxonica.com/download/dotnet.xml). To check that it is installed correctly use the following command:
 
@@ -63,12 +85,19 @@ You should then see some version info printed out.
 
 ### Usage
 
-Transfrom the MathML file to a LaTeX file using either your favourite method, or if you installed saxon (see above) with a command like following command:
+Transfrom the MathML (with pmml2tex.xsl) file to a LaTeX file using either your favourite method, or if you installed saxon (see above) with a command like one of the following command:
 
+**On Mac or Linux**
 ```bash
 saxon -s:example_mathML_from_LM_2023_HCB13_Leasehold.xml -xsl:pmml2tex.xsl -o:example.tex
 ```
-Note: the above will transform the example file `example_mathML_from_LM_2023_HCB13_Leasehold.xml` to a LaTeX file called ``example.tex``. If you want to transform a different file replace `example_mathML_from_LM_2023_HCB13_Leasehold.xml` with the path to the file you want to transform.
+
+**On Windows**
+```powershell
+saxon "-s:example_mathML_from_LM_2023_HCB13_Leasehold.xml" "-xsl:pmml2tex.xsl" "-o:example.tex"
+```
+
+Note: the above will transform the example file `example_mathML_from_LM_2023_HCB13_Leasehold.xml` to a LaTeX file called `example.tex`. If you want to transform a different file replace `example_mathML_from_LM_2023_HCB13_Leasehold.xml` with the path to the file you want to transform.
 
 You should see a new file called `example.tex`
 

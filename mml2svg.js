@@ -29,7 +29,7 @@
 //
 var argv = require('yargs')
     .demand(0).strict()
-    .usage('$0 [options] "math" > file.svg')
+    .usage('$0 [options] in_file.xml > out_file.svg')
     .options({
         inline: {
             boolean: true,
@@ -91,6 +91,7 @@ const CSS = [
   'use[data-c]{stroke-width:3px}'
 ].join('');
 
+
 //
 // Configure MathJax
 //
@@ -117,11 +118,13 @@ MathJax = {
 //
 require('mathjax-full/' + (argv.dist ? 'es5' : 'components/src/mml-svg') + '/mml-svg.js');
 
+const fs = require('fs')
+
 //
 //  Wait for MathJax to start up, and then typeset the math
 //
 MathJax.startup.promise.then(() => {
-    MathJax.mathml2svgPromise(argv._[0] || '', {
+    MathJax.mathml2svgPromise(fs.readFileSync(argv._[0]).toString() || '', {
         display: !argv.inline,
         em: argv.em,
         ex: argv.ex,

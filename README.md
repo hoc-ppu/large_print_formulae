@@ -1,6 +1,6 @@
 # Create vector graphic formulae for large print bills
 
-I have found two ways to create vector graphic formulae for large print bills. The first way is to use [LaTeX](https://www.latex-project.org/). The second way is to use the [MathJax](https://www.mathjax.org/) library. I think LaTeX might be best as the method below outpus the formula in a Sans Serif and at 20pt in size. Both methods are described below.
+I have found two ways to create vector graphic formulae for large print bills. The first way is to use [LaTeX](https://www.latex-project.org/). The second way is to use the [MathJax](https://www.mathjax.org/) library. I think the LaTeX method might be better as it outpus the formula in a font that is closer to aria and at 20pt in size, but the MathJax method is probably a bit easier. Both methods are described below.
 
 For both methods you must first extract each formula as Math ML from the LawMaker XML. See the example file, `example_mathML_from_LM_2023_HCB13_Leasehold.xml`. This was extracted from the [LawMaker XML](https://publications.parliament.uk/pa/bills/cbill/58-04/0013/230013.xml) from the [Leasehold and Freehold Reform Bill](https://bills.parliament.uk/bills/3523/publications)
 
@@ -11,12 +11,6 @@ MathJax is a JavaScript library that allows you to include mathematical formulae
 ### MathJax Installation
 
 Make sure you have [Node.js](https://nodejs.org/en/) installed.
-The file `mml2svg.js` is a node script that converts MathML to SVG. It's copied
-from the [MathJax Github](https://github.com/mathjax/MathJax-demos-node/blob/master/component/mml2svg). *Optionally*, download the most up to date version from the original github repository using the following command:
-
-```bash
-curl -O https://raw.githubusercontent.com/mathjax/MathJax-demos-node/master/component/mml2svg.js
-```
 
 Then install MathJax using the following command (in powershell if you are using Windows or in a terminal if you are using Mac or Linux):
 
@@ -26,15 +20,10 @@ npm install mathjax-full@3 --save-dev esm --save-dev yargs
 
 ### Use MathJax to create an SVG of the formula
 
-If you are using Mac or Linux use the following bash command in a terminal:
+Run the following command to create an SVG of the formula (in powershell or terminal):
 
 ```bash
-node -r esm mml2svg.js $( tr -d "\n\r" <  example_mathML_from_LM_2023_HCB13_Leasehold.xml ) > formula.svg
-```
-
-If you are using Windows use the following command in powershell:
-
-```powershell
+node -r esm mml2svg.js example_mathML_from_LM_2023_HCB13_Leasehold.xml > formula.svg
 ```
 
 ## LaTeX
@@ -46,7 +35,9 @@ Using this method, first we transform the MathML to LaTeX using [XSLT](https://w
 
 #### XSLT
 
-Make sure you have [Saxon](http://saxon.sourceforge.net/) installed. I used the [Homebrew](https://brew.sh/) package manager to install Saxon on Mac.
+If you do not already have an XSLT processor installed, you will need to install one. I used [Saxon](http://saxon.sourceforge.net/).
+
+I used the [Homebrew](https://brew.sh/) package manager to install Saxon on Mac.
 
 On windows I used installed the .Net version of Saxon from [Saxon dotnet](https://www.saxonica.com/download/dotnet.xml). To check that it is installed correctly use the following command:
 
@@ -72,7 +63,7 @@ You should then see some version info printed out.
 
 ### Usage
 
-Transfrom the MathML file to a LaTeX file using a command like following command:
+Transfrom the MathML file to a LaTeX file using either your favourite method, or if you installed saxon (see above) with a command like following command:
 
 ```bash
 saxon -s:example_mathML_from_LM_2023_HCB13_Leasehold.xml -xsl:pmml2tex.xsl -o:example.tex
@@ -87,4 +78,4 @@ next create a PDF using the following command:
 pdflatex example.tex
 ```
 
-You should now see a new file called `example.pdf`. You can insert this file into the Large print Bill.
+You should now see a new file called `example.pdf`. You can insert this file into the large print bill in InDesign.

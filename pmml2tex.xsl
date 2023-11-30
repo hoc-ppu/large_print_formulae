@@ -10,7 +10,7 @@
 
 <xsl:import href="pmml2texfrag.xsl"/>
 
-<xsl:output encoding="US-ASCII" method="text" omit-xml-declaration="yes" indent="no"/>
+<xsl:output encoding="UTF-8" method="text" omit-xml-declaration="yes" indent="no"/>
 
 
 <!-- changed to also work with single formula mathML XML documents -->

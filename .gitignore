@@ -1,6 +1,7 @@
 example.aux
 example.pdf
 example.tex
+formula.svg
 package.json
 package-lock.json
 
@@ -9,4 +10,5 @@ node_modules/
 # TeX stuff
 *.aux
 *.log
+*.tex
 

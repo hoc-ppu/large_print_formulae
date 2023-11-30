@@ -5,3 +5,8 @@ package.json
 package-lock.json
 
 node_modules/
+
+# TeX stuff
+*.aux
+*.log
+
